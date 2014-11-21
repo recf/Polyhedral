@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
@@ -15,31 +16,39 @@ namespace Polyhedral.Tests
             get
             {
                 var cases = new List<object[]>
-                                {
-                                    new object[] { new DiceRoll(), "+0" },
-                                    new object[] { new DiceRoll(d4: 1), "d4" },
-                                    new object[] { new DiceRoll(d6: 1), "d6" },
-                                    new object[] { new DiceRoll(d8: 1), "d8" },
-                                    new object[] { new DiceRoll(d10: 1), "d10" },
-                                    new object[] { new DiceRoll(d12: 1), "d12" },
-                                    new object[] { new DiceRoll(d4: 1, d12: 1), "d12+d4" },
-                                    new object[] { new DiceRoll(d4: 2, d12: 2), "2d12+2d4" },
-                                    new object[] { new DiceRoll(modifier: 3), "+3" },
-                                    new object[] { new DiceRoll(modifier: -1), "-1" },
-                                    new object[] { new DiceRoll(d10: 2), "2d10" },
-                                    new object[] { new DiceRoll(d8: 1, modifier: 2), "d8+2" },
-                                    new object[] { new DiceRoll(d4: 1, modifier: -1), "d4-1" },
-                                    new object[]
-                                        {
-                                            new DiceRoll(d4: 1, d6: 1, d8: 2, d10: 2, d12: 1),
-                                            "d12+2d10+2d8+d6+d4"
-                                        },
-                                    new object[]
-                                        {
-                                            new DiceRoll(d4: 1, d6: 1, d8: 2, d10: 2, d12: 1, modifier: 1),
-                                            "d12+2d10+2d8+d6+d4+1"
-                                        }
-                                };
+                {
+                    new object[] { new DiceRoll(), "+0" },
+                    new object[] { new DiceRoll(d4: 1), "d4" },
+                    new object[] { new DiceRoll(d6: 1), "d6" },
+                    new object[] { new DiceRoll(d8: 1), "d8" },
+                    new object[] { new DiceRoll(d10: 1), "d10" },
+                    new object[] { new DiceRoll(d12: 1), "d12" },
+                    new object[] { new DiceRoll(d4: 1, d12: 1), "d12+d4" },
+                    new object[] { new DiceRoll(d4: 2, d12: 2), "2d12+2d4" },
+                    new object[] { new DiceRoll(modifier: 3), "+3" },
+                    new object[] { new DiceRoll(modifier: -1), "-1" },
+                    new object[] { new DiceRoll(d10: 2), "2d10" },
+                    new object[] { new DiceRoll(d8: 1, modifier: 2), "d8+2" },
+                    new object[] { new DiceRoll(d4: 1, modifier: -1), "d4-1" },
+                    new object[]
+                    {
+                        new DiceRoll(d4: 1, d6: 1, d8: 2, d10: 2, d12: 1),
+                        "d12+2d10+2d8+d6+d4"
+                    },
+                    new object[]
+                    {
+                        new DiceRoll(d4: 1, d6: 1, d8: 2, d10: 2, d12: 1, modifier: 1),
+                        "d12+2d10+2d8+d6+d4+1"
+                    },
+                    new object[]
+                    {
+                        new DiceRoll(d20: 1), "d20"
+                    },
+                    new object[]
+                    {
+                        new DiceRoll(d100: 1), "d100"
+                    }
+                };
 
                 return cases.ToArray();
             }
@@ -63,6 +72,8 @@ namespace Polyhedral.Tests
             Assert.That(actual.D8, Is.EqualTo(expected.D8), "Number of d8s should match.");
             Assert.That(actual.D10, Is.EqualTo(expected.D10), "Number of d10s should match.");
             Assert.That(actual.D12, Is.EqualTo(expected.D12), "Number of d12s should match.");
+            Assert.That(actual.D20, Is.EqualTo(expected.D20), "Number of d20s should match.");
+            Assert.That(actual.D100, Is.EqualTo(expected.D100), "Number of d100s should match.");
             Assert.That(actual.Modifier, Is.EqualTo(expected.Modifier), "Modifiers should match.");
         }
 

@@ -2,5 +2,3 @@
 
 == Source TODOs
 
-* link:./Polyhedral/DiceRoll.cs[]
-** link:./Polyhedral/DiceRoll.cs#L9[9] Add d20. Copied from Rotted Capes which doesn't really use d20s

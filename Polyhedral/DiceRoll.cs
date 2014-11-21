@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace Polyhedral
 {
-    // TODO Add d20. Copied from Rotted Capes which doesn't really use d20s
     public class DiceRoll : IEquatable<DiceRoll>
     {
         public static DiceRoll Parse(string input)
@@ -18,6 +17,8 @@ namespace Polyhedral
                                { 8, 0 },
                                { 10, 0 },
                                { 12, 0 },
+                               { 20, 0 },
+                               { 100, 0 },
                            };
 
             var modifier = 0;
@@ -53,7 +54,7 @@ namespace Polyhedral
                 }
             }
 
-            return new DiceRoll(d4: dice[4], d6: dice[6], d8: dice[8], d10: dice[10], d12: dice[12], modifier: modifier);
+            return new DiceRoll(d4: dice[4], d6: dice[6], d8: dice[8], d10: dice[10], d12: dice[12], d20: dice[20], d100: dice[100], modifier: modifier);
         }
 
         public static bool operator ==(DiceRoll a, DiceRoll b)
@@ -75,6 +76,8 @@ namespace Polyhedral
                 && a.D8 == b.D8
                 && a.D10 == b.D10
                 && a.D12 == b.D12
+                && a.D20 == b.D20
+                && a.D100 == b.D100
                 && a.Modifier == b.Modifier;
         }
 
@@ -125,6 +128,22 @@ namespace Polyhedral
             }
         }
 
+        public uint D20
+        {
+            get
+            {
+                return _storage[20];
+            }
+        }
+
+        public uint D100
+        {
+            get
+            {
+                return _storage[100];
+            }
+        }
+
         public int Modifier { get; private set; }
 
         public int MaximumRoll
@@ -135,7 +154,7 @@ namespace Polyhedral
             }
         }
 
-        public DiceRoll(uint d4 = 0, uint d6 = 0, uint d8 = 0, uint d10 = 0, uint d12 = 0, int modifier = 0)
+        public DiceRoll(uint d4 = 0, uint d6 = 0, uint d8 = 0, uint d10 = 0, uint d12 = 0, uint d20 = 0, uint d100 = 0, int modifier = 0)
         {
             _storage = new Dictionary<int, uint>()
                            {
@@ -144,6 +163,8 @@ namespace Polyhedral
                                { 8, d8 },
                                { 10, d10 },
                                { 12, d12 },
+                               { 20, d20 },
+                               { 100, d100 },
                            };
             this.Modifier = modifier;
         }
@@ -203,6 +224,8 @@ namespace Polyhedral
                 && D8 == other.D8
                 && D10 == other.D10
                 && D12 == other.D12
+                && D20 == other.D20
+                && D100 == other.D100
                 && Modifier == other.Modifier;
         }
     }
