@@ -7,9 +7,16 @@ assembly_info:
   assembly_file_version: "{version}"
   assembly_informational_version: "{version}-alpha"
 
-install:
-  - cinst stylecop
-
 configuration:
   - Debug
   - Release
+
+nuget:
+  account_feed: true
+  project_feed: true
+
+install:
+  - cinst stylecop
+
+build:
+  publish_nuget: true
