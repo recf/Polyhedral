@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Polyhedral")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Polyhedral Dice for Tabletop RPGs")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Aaron Dorheim-Davis")]
 [assembly: AssemblyProduct("Polyhedral")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
