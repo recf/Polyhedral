@@ -1,4 +1,8 @@
 ﻿= TODOs
 
+* Look into psake.
+** Possibly make Extract-SourceTodos.ps1 into a psake task
+* :question: Merge TODOs into the Readme file?
+
 == Source TODOs
 

@@ -11,6 +11,9 @@ configuration:
   - Debug
   - Release
 
+matrix:
+  fast_finish: true
+
 nuget:
   account_feed: true
   project_feed: true
