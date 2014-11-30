@@ -57,6 +57,8 @@ namespace Polyhedral
             return new DiceRoll(d4: dice[4], d6: dice[6], d8: dice[8], d10: dice[10], d12: dice[12], d20: dice[20], d100: dice[100], modifier: modifier);
         }
 
+        #region Operators
+
         public static bool operator ==(DiceRoll a, DiceRoll b)
         {
             // If both are null, or both are same instance, return true.
@@ -85,6 +87,27 @@ namespace Polyhedral
         {
             return !(a == b);
         }
+
+        public static DiceRoll operator +(DiceRoll a, DiceRoll b)
+        {
+            return new DiceRoll(
+                a.D4 + b.D4,
+                a.D6 + b.D6,
+                a.D8 + b.D8,
+                a.D10 + b.D10,
+                a.D12 + b.D12,
+                a.D20 + b.D20,
+                a.D100 + b.D100,
+                a.Modifier + b.Modifier);
+        }
+
+
+        public static DiceRoll operator +(DiceRoll d, int mod)
+        {
+            return d + new DiceRoll(modifier: mod);
+        }
+
+        #endregion
 
         private Dictionary<int, uint> _storage;
 
@@ -212,6 +235,8 @@ namespace Polyhedral
             return MaximumRoll;
         }
 
+        #region IEquatable<T>
+
         public bool Equals(DiceRoll other)
         {
             if (other == null)
@@ -228,5 +253,7 @@ namespace Polyhedral
                 && D100 == other.D100
                 && Modifier == other.Modifier;
         }
+
+        #endregion
     }
 }

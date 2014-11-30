@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
@@ -88,6 +89,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             var b = new DiceRoll(
@@ -96,6 +99,8 @@ namespace Polyhedral.Tests
                 d8: a.D8,
                 d10: a.D10,
                 d12: a.D12,
+                d20: a.D20,
+                d100: a.D100,
                 modifier: a.Modifier);
 
             var c = new DiceRoll(
@@ -104,6 +109,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             // Strongly typed version
@@ -140,6 +147,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             var b = new DiceRoll(
@@ -148,6 +157,8 @@ namespace Polyhedral.Tests
                 d8: a.D8,
                 d10: a.D10,
                 d12: a.D12,
+                d20: a.D20,
+                d100: a.D100,
                 modifier: a.Modifier);
 
             var c = new DiceRoll(
@@ -156,6 +167,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             Assert.That(a == a, Is.True);
@@ -181,6 +194,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             var b = new DiceRoll(
@@ -189,6 +204,8 @@ namespace Polyhedral.Tests
                 d8: a.D8,
                 d10: a.D10,
                 d12: a.D12,
+                d20: a.D20,
+                d100: a.D100,
                 modifier: a.Modifier);
 
             var c = new DiceRoll(
@@ -197,6 +214,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             Assert.That(a != a, Is.False);
@@ -222,6 +241,8 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             var b = new DiceRoll(
@@ -230,6 +251,8 @@ namespace Polyhedral.Tests
                 d8: a.D8,
                 d10: a.D10,
                 d12: a.D12,
+                d20: a.D20,
+                d100: a.D100,
                 modifier: a.Modifier);
 
             var c = new DiceRoll(
@@ -238,12 +261,46 @@ namespace Polyhedral.Tests
                 d8: (uint)rand.Next(),
                 d10: (uint)rand.Next(),
                 d12: (uint)rand.Next(),
+                d20: (uint)rand.Next(),
+                d100: (uint)rand.Next(),
                 modifier: rand.Next());
 
             Assert.That(a.GetHashCode(), Is.EqualTo(a.GetHashCode()));
 
             Assert.That(a.GetHashCode(), Is.EqualTo(b.GetHashCode()));
             Assert.That(a.GetHashCode(), Is.Not.EqualTo(c.GetHashCode()));
+        }
+
+
+        public IEnumerable AdditionCases
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    new DiceRoll(1,1,1,1,1,1,1,1),
+                    new DiceRoll(1,1,1,1,1,1,1,1),
+                    new DiceRoll(2,2,2,2,2,2,2,2)
+                };
+            }
+        }
+
+        [Test]
+        [TestCaseSource("AdditionCases")]
+        public void TestAddition(DiceRoll a, DiceRoll b, DiceRoll expected)
+        {
+            var actual = a + b;
+
+            Assert.That(actual, Is.EqualTo(expected));
+        }
+
+        [Test]
+        public void TestAdditionInt()
+        {
+            var actual = new DiceRoll(d4: 1) + 1;
+            var expected = new DiceRoll(d4: 1, modifier: 1);
+
+            Assert.That(actual, Is.EqualTo(expected));
         }
 
         [Test]
