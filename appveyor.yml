@@ -1,11 +1,11 @@
-version: 0.1.0.{build}
+version: 0.1.{build}
 
 assembly_info:
   patch: true
   file: AssemblyInfo.*
   assembly_version: "{version}"
   assembly_file_version: "{version}"
-  assembly_informational_version: "{version}-alpha"
+  assembly_informational_version: "{version}"
 
 configuration:
   - Debug
