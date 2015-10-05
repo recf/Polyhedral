@@ -14,7 +14,7 @@ namespace Polyhedral.Tests
         [TestCase(6U, new uint[] {1,2,3,4,5,6})]
         public void TestResultSpace(uint faces, uint[] resultSpace)
         {
-            var die = new Die<uint>(faces, u => u);
+            var die = new Die(faces);
 
             Assert.That(die.Faces, Is.EqualTo(faces));
 

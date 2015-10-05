@@ -10,6 +10,8 @@ namespace Polyhedral
     {
         uint Faces { get; }
 
+        T Transform(uint value);
+
         IList<T> GetResultSpace();
     }
 }
