@@ -11,7 +11,7 @@ namespace Polyhedral
     {
         #region Implementation of IDie<TResult>
 
-        public uint Faces { get; }
+        public uint Faces { get; private set; }
 
         public abstract T Transform(uint value);
 

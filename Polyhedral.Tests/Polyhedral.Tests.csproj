@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Polyhedral\Polyhedral.csproj">
-      <Project>{22468ece-bc99-485b-94b2-b2f26da29ab6}</Project>
+      <Project>{719EB7E4-2B7E-4295-A020-35EDFB3B8955}</Project>
       <Name>Polyhedral</Name>
     </ProjectReference>
   </ItemGroup>
